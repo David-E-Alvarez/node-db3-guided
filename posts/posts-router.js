@@ -1,24 +1,23 @@
 const express = require("express");
 
-const Users = require("./user-model.js");
+const Posts = require("./posts-model.js");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  Users.all()
+  Posts.all()
     .then(users => {
       res.json(users);
     })
     .catch(err => {
-      console.log("error", err);
-      res.status(500).json({ message: "Failed to get users" });
+      res.status(500).json({ message: "Failed to get posts" });
     });
 });
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
 
-  Users.findById(id)
+  Posts.findById(id)
     .then(user => {
       if (user) {
         res.json(user);
@@ -34,7 +33,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   const userData = req.body;
 
-  Users.add(userData)
+  Posts.add(userData)
     .then(user => {
       res.status(201).json({ created: user });
     })
@@ -47,7 +46,7 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
-  Users.update(id, changes)
+  Posts.update(id, changes)
     .then(count => {
       if (count) {
         res.json({ update: count });
@@ -63,7 +62,7 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
 
-  Users.remove(id)
+  Posts.remove(id)
     .then(count => {
       if (count) {
         res.json({ removed: count });
