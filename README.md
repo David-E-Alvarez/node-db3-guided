@@ -16,3 +16,22 @@ Guided project for **Node DB3** Module.
 - [ ] type `npm run server` to start the API.
 
 Please follow along as the instructor creates database access methods for a multi table schema.
+
+module.exports = { 
+  development: {
+    client: 'pg', 
+    connection: {
+      host: 'localhost', 
+      port: '5432',
+      user: 'postgres', 
+      database: ' ', 
+      password: 'password'
+    },
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    }
+  }
+};
